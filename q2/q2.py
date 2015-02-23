@@ -15,6 +15,8 @@ def wrapText(words, colwidth):
 	curr_line_count = 0
 
 	for word in words:
+		# if a word is not longer than the column width then add to current line if
+		# doing so does not make line too long
 		if len(word) <= colwidth:
 			if curr_line_count + len(word) + 1 > colwidth:
 				output += "\n" + word
@@ -22,6 +24,8 @@ def wrapText(words, colwidth):
 			else:
 				output += " " + word
 				curr_line_count += len(word) + 1
+		# if word is longer than column width then use as many lines needed to write word out,
+		# beginning from a new line
 		else:
 			output += "\n"
 			while len(word) > 0:
@@ -31,6 +35,7 @@ def wrapText(words, colwidth):
 				output += word[:curr_line_count]
 				word = word[curr_line_count:]
 
+	# removes any unnecessary new lines added at beginning
 	return output.strip()
 
 
